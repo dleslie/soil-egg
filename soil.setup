@@ -1,0 +1,9 @@
+(compile -s -O2 -d1 soil.scm -j soil -lSOIL)
+(compile -s soil.import.scm -O2 -d0 -lSOIL)
+(compile -c -O2 -d1 soil.scm -unit soil -j soil -lSOIL)
+
+(install-extension
+ 'soil
+ '("soil.so" "soil.o" "soil.import.so")
+ '((version 1.0)
+   (static "soil.o")))
