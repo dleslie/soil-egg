@@ -1,9 +1,24 @@
-(compile -s -O2 -d1 soil.scm -j soil -lSOIL  )
-(compile -s soil.import.scm -O2 -d0 -lSOIL )
-(compile -c -O2 -d1 soil.scm -unit soil -j soil -lSOIL )
+;; Shamelessly taken from OpenGL egg's setup
+(define compile-options
+  (cond-expand
+    (macosx "-FOpenGL -FSOIL")
+    (else "")))
+
+(define link-options
+  (cond-expand
+    (macosx "-framework OpenGL -framework SOIL")
+    (windows "-lSOIL -lopengl32")
+    (else "-lSOIL -L/usr/X11R6/lib -L/usr/X11/lib -lGL -LX11")))
+
+(compile soil.scm ,compile-options ,link-options -s -J -O3 -d0)
+(compile -s -O3 -d0 soil.import.scm)
+(compile -c -O3 -d0 soil.scm  -unit soil -j soil ,compile-options ,link-options)
 
 (install-extension
  'soil
  '("soil.so" "soil.o" "soil.import.so")
  '((version 1.0)
    (static "soil.o")))
+
+
+
