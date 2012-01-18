@@ -1,6 +1,6 @@
-(compile -s -O2 -d1 soil.scm -j soil -lSOIL -lopengl32)
-(compile -s soil.import.scm -O2 -d0 -lSOIL -lopengl32)
-(compile -c -O2 -d1 soil.scm -unit soil -j soil -lSOIL -lopengl32)
+(compile -s -O2 -d1 soil.scm -j soil -lSOIL  )
+(compile -s soil.import.scm -O2 -d0 -lSOIL )
+(compile -c -O2 -d1 soil.scm -unit soil -j soil -lSOIL )
 
 (install-extension
  'soil
