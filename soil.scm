@@ -173,7 +173,7 @@ C_return(data);
 
   (define to-image
     (lambda (c-image)
-      (let* ((length (* (c-image-width c-image) (c-image-height c-image) (foreign-type-size char)))
+      (let* ((length (* (c-image-width c-image) (c-image-height c-image) (foreign-type-size char) (c-image-channels c-image)))
             (out-blob (make-blob length)))
         (fill-blob out-blob (c-image-data c-image) length)
         (make-image out-blob (c-image-width c-image) (c-image-height c-image) (c-image-channels c-image)))))
