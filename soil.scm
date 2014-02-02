@@ -1,5 +1,6 @@
 #>
 #include <SOIL/SOIL.h>
+#include <GL/GL.h>
 
 typedef struct
 {
@@ -9,7 +10,7 @@ typedef struct
 
 <#
 
-(module soil (force-channels/auto force-channels/luminous force-channels/luminous-alpha force-channels/rgb force-channels/rgba texture-id/create-new-id texture/power-of-two texture/mipmaps texture/repeats texture/multiply-alpha texture/invert-y texture/compress texture/dds-direct texture/ntsc-safe-rgb texture/cogo-y texture/rectangle save-type/tga save-type/bmp save-type/dds dds-cubemap-face-order fake-hdr/rgbe fake-hdr/rgb-div-alpha fake-hdr/rgb-div-alpha-squared load-ogl-texture load-ogl-cubemap load-ogl-single-cubemap load-ogl-hdr-texture load-ogl-texture-from-memory load-ogl-cubemap-from-memory load-ogl-single-cubemap-from-memory create-ogl-texture create-ogl-single-cubemap save-screenshot make-image image? image-data image-width image-height image-channels image-data-set! image-width-set! image-height-set! image-channels-set! load-image load-image-from-memory save-image last-result)
+(module soil (force-channels/auto force-channels/luminous force-channels/luminous-alpha force-channels/rgb force-channels/rgba texture-id/create-new-id texture/power-of-two texture/mipmaps texture/repeats texture/multiply-alpha texture/invert-y texture/compress texture/dds-direct texture/ntsc-safe-rgb texture/cogo-y texture/rectangle save-type/tga save-type/bmp save-type/dds dds-cubemap-face-order fake-hdr/rgbe fake-hdr/rgb-div-alpha fake-hdr/rgb-div-alpha-squared load-ogl-texture load-ogl-cubemap load-ogl-single-cubemap load-ogl-hdr-texture load-ogl-texture-from-memory load-ogl-cubemap-from-memory load-ogl-single-cubemap-from-memory create-ogl-texture create-ogl-single-cubemap ogl-texture-width ogl-texture-height save-screenshot make-image image? image-data image-width image-height image-channels image-data-set! image-width-set! image-height-set! image-channels-set! load-image load-image-from-memory save-image last-result)
 
   (import chicken scheme foreign)
 
@@ -144,6 +145,16 @@ if (r == 0)
   C_return(C_SCHEME_FALSE);
 else
   C_return(r);"))
+
+  (define ogl-texture-width (foreign-lambda* int ((texture-handle handle)) "
+int width = 0;
+glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &width);
+C_return(width);"))
+
+  (define ogl-texture-height (foreign-lambda* int ((texture-handle handle)) "
+int height = 0;
+glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &height);
+C_return(height);"))
 
   (define save-screenshot (foreign-lambda* bool ((c-string* filename) (image-type type) (integer x) (integer y) (integer width) (integer height)) "
 int r = SOIL_save_screenshot(filename, type, x, y, width, height);
