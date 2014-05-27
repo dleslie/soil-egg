@@ -1,6 +1,6 @@
 #>
-#include <SOIL/SOIL.h>
 #include <GL/GL.h>
+#include "soil-src/SOIL.h"
 
 typedef struct
 {
