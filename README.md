@@ -296,14 +296,25 @@ Returns #t if succesful.
 
 Returns the last error message as a string.
 
+<procedure>(ogl-texture-width texture)</procedure>
+<procedure>(ogl-texture-height texture)</procedure>
+
+Returns the width and height of the given OpenGL texture.
+
 == Known Issues
 
 
-== Author
+== Authors
 
 Dan Leslie (dan@ironoxide.ca)
 
+Alex Charlton (alex.n.charlton@gmail.com)
+
 == Version history
+
+; 1.2 : SOIL source built into egg
+
+; 1.1 : Added procedures to retrieve texture size
 
 ; 1.0 : First release
 
