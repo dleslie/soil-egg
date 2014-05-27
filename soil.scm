@@ -1,5 +1,4 @@
 #>
-#include <GL/GL.h>
 #include "soil-src/SOIL.h"
 
 typedef struct
@@ -13,6 +12,10 @@ typedef struct
 (module soil (force-channels/auto force-channels/luminous force-channels/luminous-alpha force-channels/rgb force-channels/rgba texture-id/create-new-id texture/power-of-two texture/mipmaps texture/repeats texture/multiply-alpha texture/invert-y texture/compress texture/dds-direct texture/ntsc-safe-rgb texture/cogo-y texture/rectangle save-type/tga save-type/bmp save-type/dds dds-cubemap-face-order fake-hdr/rgbe fake-hdr/rgb-div-alpha fake-hdr/rgb-div-alpha-squared load-ogl-texture load-ogl-cubemap load-ogl-single-cubemap load-ogl-hdr-texture load-ogl-texture-from-memory load-ogl-cubemap-from-memory load-ogl-single-cubemap-from-memory create-ogl-texture create-ogl-single-cubemap ogl-texture-width ogl-texture-height save-screenshot make-image image? image-data image-width image-height image-channels image-data-set! image-width-set! image-height-set! image-channels-set! load-image load-image-from-memory save-image last-result)
 
   (import chicken scheme foreign)
+
+  (cond-expand
+   (macosx (foreign-declare "#include <OpenGL/gl.h>"))
+   (else (foreign-declare "#include <GL/gl.h>")))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Enumerations
