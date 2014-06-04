@@ -17,5 +17,5 @@
 (install-extension
  'soil
  '("soil.so" "soil.o" "soil.import.so")
- '((version 1.2.0)
+ '((version 1.2.1)
    (static "soil.o")))
