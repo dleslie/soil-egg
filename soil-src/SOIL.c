@@ -1872,24 +1872,29 @@ unsigned int SOIL_direct_load_DDS(
 
 int query_NPOT_capability( void )
 {
-	/*	check for the capability	*/
-	if( has_NPOT_capability == SOIL_CAPABILITY_UNKNOWN )
-	{
-		/*	we haven't yet checked for the capability, do so	*/
-		if(
-			(NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ),
-				"GL_ARB_texture_non_power_of_two" ) )
-			)
-		{
-			/*	not there, flag the failure	*/
-			has_NPOT_capability = SOIL_CAPABILITY_NONE;
-		} else
-		{
-			/*	it's there!	*/
-			has_NPOT_capability = SOIL_CAPABILITY_PRESENT;
-		}
-	}
-	/*	let the user know if we can do non-power-of-two textures or not	*/
+        /* Modification by Alex Charlton */
+    /* NPOT capability is present in almost all graphics cards that implement OpenGL 2.0 and up, but this breaks OpenGL 3.2 and up. Removed check for lack of a better solution.*/
+
+	/* /\*	check for the capability	*\/ */
+	/* if( has_NPOT_capability == SOIL_CAPABILITY_UNKNOWN ) */
+	/* { */
+	/* 	/\*	we haven't yet checked for the capability, do so	*\/ */
+	/* 	if( */
+	/* 		(NULL == strstr( (char const*)glGetString( GL_EXTENSIONS ), */
+	/* 			"GL_ARB_texture_non_power_of_two" ) ) */
+	/* 		) */
+	/* 	{ */
+	/* 		/\*	not there, flag the failure	*\/ */
+	/* 		has_NPOT_capability = SOIL_CAPABILITY_NONE; */
+	/* 	} else */
+	/* 	{ */
+	/* 		/\*	it's there!	*\/ */
+	/* 		has_NPOT_capability = SOIL_CAPABILITY_PRESENT; */
+	/* 	} */
+	/* } */
+	/* /\*	let the user know if we can do non-power-of-two textures or not	*\/ */
+	/* return has_NPOT_capability; */
+	has_NPOT_capability = SOIL_CAPABILITY_PRESENT;
 	return has_NPOT_capability;
 }
 

@@ -1,4 +1,5 @@
 (repo git "git@github.com:dleslie/soil-egg.git")
 (uri targz "https://github.com/dleslie/soil-egg/tarball/{egg-release}")
+(release "1.2.1")
 (release "1.2.0")
 (release "1.1.0")
