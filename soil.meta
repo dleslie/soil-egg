@@ -2,8 +2,6 @@
  (category io)
  (author "Daniel J. Leslie")
 
- (needs foreign)
-
  (foreign-depends "GL")
 
  (synopsis "Lightweight, simple library for loading image files into OpenGL-friendly format.")
