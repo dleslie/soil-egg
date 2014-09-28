@@ -86,68 +86,55 @@ typedef struct
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Functions
 
-  (define load-ogl-texture (foreign-lambda* texture-handle ((c-string* filename) (force-channels channels) (texture-id id) (texture-flags tflags)) "
+  (define (%load-wrap func)
+    (lambda (#!rest args)
+      (let ((ret (apply func args)))
+	(if (zero? ret) #f ret))))
+
+  (define load-ogl-texture 
+    (%load-wrap (foreign-lambda* texture-handle ((c-string* filename) (force-channels channels) (texture-id id) (texture-flags tflags)) "
 unsigned int r = SOIL_load_OGL_texture(filename, channels, id, tflags);
-if (r == 0)
-  C_return(C_SCHEME_FALSE);
-else
-  C_return(r);"))
+C_return(r);")))
 
-  (define load-ogl-cubemap (foreign-lambda* texture-handle ((c-string* xpos) (c-string* xneg) (c-string* ypos) (c-string* yneg) (c-string* zpos) (c-string* zneg) (force-channels channels) (texture-id id) (texture-flags tflags)) "
+  (define load-ogl-cubemap 
+    (%load-wrap (foreign-lambda* texture-handle ((c-string* xpos) (c-string* xneg) (c-string* ypos) (c-string* yneg) (c-string* zpos) (c-string* zneg) (force-channels channels) (texture-id id) (texture-flags tflags)) "
 unsigned int r = SOIL_load_OGL_cubemap(xpos, xneg, ypos, yneg, zpos, zneg, channels, id, tflags);
-if (r == 0)
-  C_return(C_SCHEME_FALSE);
-else
-  C_return(r);"))
+C_return(r);")))
 
-  (define load-ogl-single-cubemap (foreign-lambda* texture-handle ((c-string* filename) (c-string* order) (force-channels channels) (texture-id id) (texture-flags tflags)) "
+  (define load-ogl-single-cubemap 
+    (%load-wrap (foreign-lambda* texture-handle ((c-string* filename) (c-string* order) (force-channels channels) (texture-id id) (texture-flags tflags)) "
 unsigned int r = SOIL_load_OGL_single_cubemap(filename, order, channels, id, tflags);
-if (r == 0)
-  C_return(C_SCHEME_FALSE);
-else
-  C_return(r);"))
+C_return(r);")))
 
-  (define load-ogl-hdr-texture (foreign-lambda* texture-handle ((c-string* filename) (hdr-format hdr) (bool rescale) (texture-id id) (texture-flags tflags)) "
+  (define load-ogl-hdr-texture
+    (%load-wrap (foreign-lambda* texture-handle ((c-string* filename) (hdr-format hdr) (bool rescale) (texture-id id) (texture-flags tflags)) "
 unsigned int r = SOIL_load_OGL_HDR_texture(filename, hdr, rescale, id, tflags);
-if (r == 0)
-  C_return(C_SCHEME_FALSE);
-else
-  C_return(r);"))
+C_return(r);")))
 
-  (define load-ogl-texture-from-memory (foreign-lambda* texture-handle ((blob buffer) (integer length) (force-channels channels) (texture-id id) (texture-flags tflags)) "
+  (define load-ogl-texture-from-memory 
+    (%load-wrap (foreign-lambda* texture-handle ((blob buffer) (integer length) (force-channels channels) (texture-id id) (texture-flags tflags)) "
 unsigned int r = SOIL_load_OGL_texture_from_memory(buffer, length, channels, id, tflags);
-if (r == 0)
-  C_return(C_SCHEME_FALSE);
-else
-  C_return(r);"))
+C_return(r);")))
 
-  (define load-ogl-cubemap-from-memory (foreign-lambda* texture-handle ((blob xpos) (integer xposlength) (blob xneg) (integer xneglength) (blob ypos) (integer yposlength) (blob yneg) (integer yneglength) (blob zpos) (integer zposlength) (blob zneg) (integer zneglength) (force-channels channels) (texture-id id) (texture-flags tflags)) "
+  (define load-ogl-cubemap-from-memory 
+    (%load-wrap (foreign-lambda* texture-handle ((blob xpos) (integer xposlength) (blob xneg) (integer xneglength) (blob ypos) (integer yposlength) (blob yneg) (integer yneglength) (blob zpos) (integer zposlength) (blob zneg) (integer zneglength) (force-channels channels) (texture-id id) (texture-flags tflags)) "
 unsigned int r = SOIL_load_OGL_cubemap_from_memory(xpos, xposlength, xneg, xneglength, ypos, yposlength, yneg, yneglength, zpos, zposlength, zneg, zneglength, channels, id, tflags);
-if (r == 0)
-  C_return(C_SCHEME_FALSE);
-else
-  C_return(r);"))
+C_return(r);")))
 
-  (define load-ogl-single-cubemap-from-memory (foreign-lambda* texture-handle ((blob buffer) (integer length) (c-string* order) (force-channels channels) (texture-id id) (texture-flags tflags)) "
+  (define load-ogl-single-cubemap-from-memory 
+    (%load-wrap (foreign-lambda* texture-handle ((blob buffer) (integer length) (c-string* order) (force-channels channels) (texture-id id) (texture-flags tflags)) "
 unsigned int r = SOIL_load_OGL_single_cubemap_from_memory(buffer, length, order, channels, id, tflags);
-if (r == 0)
-  C_return(C_SCHEME_FALSE);
-else
-  C_return(r);"))
+C_return(r);")))
 
-  (define create-ogl-texture (foreign-lambda* texture-handle ((blob data) (integer width) (integer height) (integer channels) (texture-id id) (texture-flags tflags)) "
+  (define create-ogl-texture
+    (%load-wrap (foreign-lambda* texture-handle ((blob data) (integer width) (integer height) (integer channels) (texture-id id) (texture-flags tflags)) "
 unsigned int r = SOIL_create_OGL_texture(data, width, height, channels, id, tflags);
-if (r == 0)
-  C_return(C_SCHEME_FALSE);
-else
-  C_return(r);"))
+C_return(r);")))
 
-  (define create-ogl-single-cubemap (foreign-lambda* texture-handle ((blob data) (integer width) (integer height) (integer channels) (c-string* order) (texture-id id) (texture-flags tflags)) "
+  (define create-ogl-single-cubemap 
+    (%load-wrap (foreign-lambda* texture-handle ((blob data) (integer width) (integer height) (integer channels) (c-string* order) (texture-id id) (texture-flags tflags)) "
 unsigned int r = SOIL_create_OGL_single_cubemap(data, width, height, channels, order, id, tflags);
-if (r == 0)
-  C_return(C_SCHEME_FALSE);
-else
-  C_return(r);"))
+C_return(r);")))
 
   (define ogl-texture-width (foreign-lambda* int ((texture-handle handle)) "
 int width = 0;
