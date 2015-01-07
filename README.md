@@ -298,6 +298,7 @@ Alex Charlton (alex.n.charlton@gmail.com)
 
 ## Version history
 
+- 1.3: Remove `dds-cubemap-face-order`, fix texture creation function return values, support OpenGL ES
 - 1.2: SOIL source built into egg
 - 1.1: Added procedures to retrieve texture size
 - 1.0: First release
