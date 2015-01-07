@@ -8,7 +8,8 @@
   (cond-expand
     (macosx "-framework OpenGL ")
     (windows "-lopengl32")
-    (else "-L/usr/X11R6/lib -L/usr/X11/lib -lGL -LX11")))
+    ((or gles arm) "-lGLESv2")
+    (else "-lGL")))
 
 (compile soil.scm ./soil-src/*.c -Isoil-src ,compile-options ,link-options -s -J -O3 -d0)
 (compile -s -O3 -d0 soil.import.scm)
