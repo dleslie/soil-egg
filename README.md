@@ -186,7 +186,7 @@ Returns the last error message as a string.
 Returns the width and height of the given OpenGL texture.
 
 
-### Flags and Enumerations
+### Flags
 
 #### Image Loading
 
