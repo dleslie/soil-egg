@@ -273,12 +273,6 @@ BMP format in uncompressed RGB
 
 DDS format in DXT1 or DXT5
 
-#### Cube Maps
-
-    [constant] dds-cubemap-face-order
-
-The face order a DDS cubemap. Set to `EWUDNS`. In order to reorder this you will need to redefine `SOIL_DDS_CUBEMAP_FACE_ORDER` in `SOIL.h`.
-
 #### Internal HDR Representations
 
     [constant] fake-hdr/rgbe
