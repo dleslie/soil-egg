@@ -209,12 +209,3 @@ C_return(SOIL_save_image(f, t, width, height, c, data));
         (= 1 (save filename type (image-width soil-image) (image-height soil-image) (image-channels soil-image) (image-data soil-image))))))
 
   (define last-result (foreign-lambda c-string "SOIL_last_result")))
-
-
-
-
-
-
-
-
-
