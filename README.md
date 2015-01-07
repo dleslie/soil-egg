@@ -10,6 +10,8 @@ The source is available on [GitHub](https://github.com/dleslie/soil-egg)
 
 The interface adheres closely to the stock SOIL interface.
 
+soil is known to work on Linux, Mac OS X, Windows, and with OpenGL ES. soil will automatically compile with ES support on ARM hardware, or when `gles` is defined during compilation (e.g. `chicken-install -D gles`).
+
 Much thanks to Jonathan Dummer for writing the original SOIL library.
 
 ## SOIL Overview
