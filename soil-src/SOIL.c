@@ -1929,6 +1929,10 @@ int query_tex_rectangle_capability( void )
 
 int query_cubemap_capability( void )
 {
+  /* Modified by Alex Charlton: Query breaks OSX for some reason*/
+#if defined(__APPLE__) || defined(__APPLE_CC__)
+  has_cubemap_capability = SOIL_CAPABILITY_PRESENT;
+#else 
 	/*	check for the capability	*/
 	if( has_cubemap_capability == SOIL_CAPABILITY_UNKNOWN )
 	{
@@ -1950,6 +1954,7 @@ int query_cubemap_capability( void )
 		}
 	}
 	/*	let the user know if we can do cubemaps or not	*/
+#endif
 	return has_cubemap_capability;
 }
 

@@ -9,7 +9,7 @@ typedef struct
 
 <#
 
-(module soil (force-channels/auto force-channels/luminous force-channels/luminous-alpha force-channels/rgb force-channels/rgba texture-id/create-new-id texture/power-of-two texture/mipmaps texture/repeats texture/multiply-alpha texture/invert-y texture/compress texture/dds-direct texture/ntsc-safe-rgb texture/cogo-y texture/rectangle save-type/tga save-type/bmp save-type/dds dds-cubemap-face-order fake-hdr/rgbe fake-hdr/rgb-div-alpha fake-hdr/rgb-div-alpha-squared load-ogl-texture load-ogl-cubemap load-ogl-single-cubemap load-ogl-hdr-texture load-ogl-texture-from-memory load-ogl-cubemap-from-memory load-ogl-single-cubemap-from-memory create-ogl-texture create-ogl-single-cubemap ogl-texture-width ogl-texture-height save-screenshot make-image image? image-data image-width image-height image-channels image-data-set! image-width-set! image-height-set! image-channels-set! load-image load-image-from-memory save-image last-result)
+(module soil (force-channels/auto force-channels/luminous force-channels/luminous-alpha force-channels/rgb force-channels/rgba texture-id/create-new-id texture/power-of-two texture/mipmaps texture/repeats texture/multiply-alpha texture/invert-y texture/compress texture/dds-direct texture/ntsc-safe-rgb texture/cogo-y texture/rectangle save-type/tga save-type/bmp save-type/dds fake-hdr/rgbe fake-hdr/rgb-div-alpha fake-hdr/rgb-div-alpha-squared load-ogl-texture load-ogl-cubemap load-ogl-single-cubemap load-ogl-hdr-texture load-ogl-texture-from-memory load-ogl-cubemap-from-memory load-ogl-single-cubemap-from-memory create-ogl-texture create-ogl-single-cubemap ogl-texture-width ogl-texture-height save-screenshot make-image image? image-data image-width image-height image-channels image-data-set! image-width-set! image-height-set! image-channels-set! load-image load-image-from-memory save-image last-result)
 
   (import chicken scheme foreign)
 
@@ -61,10 +61,6 @@ typedef struct
   (define save-type/tga SOIL_SAVE_TYPE_TGA)
   (define save-type/bmp SOIL_SAVE_TYPE_BMP)
   (define save-type/dds SOIL_SAVE_TYPE_DDS)
-
-  
-  (define-foreign-variable SOIL_DDS_CUBEMAP_FACE_ORDER c-string)
-  (define dds-cubemap-face-order SOIL_DDS_CUBEMAP_FACE_ORDER)
 
   (define-foreign-variable SOIL_HDR_RGBE unsigned-integer)
   (define-foreign-variable SOIL_HDR_RGBdivA unsigned-integer)
@@ -213,12 +209,3 @@ C_return(SOIL_save_image(f, t, width, height, c, data));
         (= 1 (save filename type (image-width soil-image) (image-height soil-image) (image-channels soil-image) (image-data soil-image))))))
 
   (define last-result (foreign-lambda c-string "SOIL_last_result")))
-
-
-
-
-
-
-
-
-
