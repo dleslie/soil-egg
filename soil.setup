@@ -6,7 +6,7 @@
 
 (define link-options
   (cond-expand
-    (macosx "-framework OpenGL ")
+    (macosx "-framework OpenGL -framework CoreFoundation")
     (windows "-lopengl32")
     (else "-L/usr/X11R6/lib -L/usr/X11/lib -lGL -LX11")))
 
