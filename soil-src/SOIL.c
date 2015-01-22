@@ -47,7 +47,7 @@ enum{
 	SOIL_CAPABILITY_NONE = 0,
 	SOIL_CAPABILITY_PRESENT = 1
 };
-static int has_cubemap_capability = SOIL_CAPABILITY_UNKNOWN;
+static int has_cubemap_capability = SOIL_CAPABILITY_PRESENT;
 int query_cubemap_capability( void );
 #define SOIL_TEXTURE_WRAP_R					0x8072
 #define SOIL_CLAMP_TO_EDGE					0x812F
@@ -64,15 +64,15 @@ int query_cubemap_capability( void );
 #define SOIL_PROXY_TEXTURE_CUBE_MAP			0x851B
 #define SOIL_MAX_CUBE_MAP_TEXTURE_SIZE		0x851C
 /*	for non-power-of-two texture	*/
-static int has_NPOT_capability = SOIL_CAPABILITY_UNKNOWN;
+static int has_NPOT_capability = SOIL_CAPABILITY_PRESENT;
 int query_NPOT_capability( void );
 /*	for texture rectangles	*/
-static int has_tex_rectangle_capability = SOIL_CAPABILITY_UNKNOWN;
+static int has_tex_rectangle_capability = SOIL_CAPABILITY_PRESENT;
 int query_tex_rectangle_capability( void );
 #define SOIL_TEXTURE_RECTANGLE_ARB				0x84F5
 #define SOIL_MAX_RECTANGLE_TEXTURE_SIZE_ARB		0x84F8
 /*	for using DXT compression	*/
-static int has_DXT_capability = SOIL_CAPABILITY_UNKNOWN;
+static int has_DXT_capability = SOIL_CAPABILITY_PRESENT;
 int query_DXT_capability( void );
 #define SOIL_RGB_S3TC_DXT1		0x83F0
 #define SOIL_RGBA_S3TC_DXT1		0x83F1
@@ -1228,7 +1228,7 @@ unsigned int
 			}
 			if( DDS_data )
 			{
-				soilGlCompressedTexImage2D(
+				glCompressedTexImage2D(
 					opengl_texture_target, 0,
 					internal_texture_format, width, height, 0,
 					DDS_size, DDS_data );
@@ -1288,7 +1288,7 @@ unsigned int
 					}
 					if( DDS_data )
 					{
-						soilGlCompressedTexImage2D(
+						glCompressedTexImage2D(
 							opengl_texture_target, MIPlevel,
 							internal_texture_format, MIPwidth, MIPheight, 0,
 							DDS_size, DDS_data );
@@ -1738,7 +1738,7 @@ unsigned int SOIL_direct_load_DDS_from_memory(
 					S3TC_type, GL_UNSIGNED_BYTE, DDS_data );
 			} else
 			{
-				soilGlCompressedTexImage2D(
+				glCompressedTexImage2D(
 					cf_target, 0,
 					S3TC_type, width, height, 0,
 					DDS_main_size, DDS_data );
@@ -1768,7 +1768,7 @@ unsigned int SOIL_direct_load_DDS_from_memory(
 				} else
 				{
 					mip_size = ((w+3)/4)*((h+3)/4)*block_size;
-					soilGlCompressedTexImage2D(
+					gLCompressedTexImage2D(
 						cf_target, i,
 						S3TC_type, w, h, 0,
 						mip_size, &DDS_data[byte_offset] );
