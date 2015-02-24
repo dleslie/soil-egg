@@ -1768,7 +1768,7 @@ unsigned int SOIL_direct_load_DDS_from_memory(
 				} else
 				{
 					mip_size = ((w+3)/4)*((h+3)/4)*block_size;
-					gLCompressedTexImage2D(
+					glCompressedTexImage2D(
 						cf_target, i,
 						S3TC_type, w, h, 0,
 						mip_size, &DDS_data[byte_offset] );
