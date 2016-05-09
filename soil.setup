@@ -7,7 +7,7 @@
 (define link-options
   (cond-expand
     (macosx "-framework OpenGL -framework CoreFoundation")
-    (windows "-lopengl32")
+    (windows "-lglew32 -lopengl32")
     ((or gles arm) "-lGLESv2")
     (else "-lGL")))
 

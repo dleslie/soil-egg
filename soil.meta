@@ -2,7 +2,7 @@
  (category io)
  (author "Daniel J. Leslie")
 
- (foreign-depends "GL")
+ (foreign-depends "GL" "GLEW")
 
  (synopsis "Lightweight, simple library for loading image files into OpenGL-friendly format.")
  (doc-from-wiki))
