@@ -1,8 +1,9 @@
-[[tags: egg soil image opengl gl bmp tga dds png jpg game]]
+# Important!
+
+This project is now maintained at:
+https://github.com/kdltr/soil-egg
 
 # soil
-
-[[toc:]]
 
 [SOIL](http://www.lonesock.net/soil.html) bindings for Chicken.
 
